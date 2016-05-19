@@ -1,0 +1,64 @@
+//
+//	Part 1: New question structure that can handle questions in table format e.g question 1.3 and 2.3
+//				(Please note the 3 extra fields and make sure you understand their comments)
+//
+q.section["1"]["question"]["1.3"] = {};
+q.section["1"]["question"]["1.3"]["tags"] = ["household", "gender"];
+q.section["1"]["question"]["1.3"]["question"] = "How many house members fit in the following age-brackets?";
+q.section["1"]["question"]["1.3"]["options"] = null;
+q.section["1"]["question"]["1.3"]["answer"] = null;
+q.section["1"]["question"]["1.3"]["other_option"] = null;// if user chooses 'other' (e.g. in question 2.5.3) we store that answer here
+q.section["1"]["question"]["1.3"]["ui_type"] = "table";// possible values = radio, checkbox, text, number, table
+q.section["1"]["question"]["1.3"]["table"] = [// value of this field is always null, unless ui_type (on line above) is "table"
+					{	"question": "0 – 5 years", 	"answer" : { "male": 5, "female" : 2 } },
+					{	"question": "6 - 17 years", "answer" : { "male": 5, "female" : 2 } },
+					{	"question": "18-65 years", 	"answer" : { "male": 5, "female" : 2 } },
+					{	"question": "65+ years", 	"answer" : { "male": 5, "female" : 2 } }
+				];
+
+
+
+//
+//	Part 2: Proof of correctness 
+//	This code tests if data can be stored and also printed from the newly added table[] field
+//	
+//
+
+
+// 	Test 1 = store data
+//	Note: x is in the same format as table[], above
+var x = [	{	"question": "0 – 5 years", 	"answer" : { "male": 3, "female" : 1 } },
+			{	"question": "6 - 17 years", "answer" : { "male": 4, "female" : 2 } },
+			{	"question": "18-65 years", 	"answer" : { "male": 1, "female" : 2 } },
+			{	"question": "65+ years", 	"answer" : { "male": 0, "female" : 1 } }
+		];
+
+var f = function(cols){
+
+	var cells = "";
+	for(reply in cols){
+	  	if(cols.hasOwnProperty(reply)){
+			cells += reply + ' -> ' + cols[reply] + ', ';
+	  	}
+	}
+	return cells;
+};
+
+function ans(){
+
+	console.log("How many house members fit in the following age-brackets?");
+	console.log("Answers are...");
+
+	for(var i=0; i<nQuestions; i++){
+	  q = x[i].question;
+	  a = x[i].answer;
+
+
+	  console.log(q + ' : ' + f(a));
+	}
+}
+
+//	Test 2 = Can we retrieve the stored data?
+// 	Type this command to run this test:
+ans();
+
